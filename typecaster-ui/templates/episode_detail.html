@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Edit episode</h1>
+
+{% if action == 'Edit' %}
+<form id="episode" method="post">
+{% endif %}
+{% if action == 'Create' %}
+<form id="episode" method="post">
+{% endif %}
+  <div>
+    <label for="text">Text:</label>
+    <textarea name="text" value="{{ episode.text }}"></textarea>
+  </div>
+  <div>
+    <label for="subtitle">Text format:</label>
+    <input type="text" name="text_format" value="{{ episode.text_format }}" />
+  </div>
+  <div>
+    <label for="title">Title:</label>
+    <input type="text" name="title" value="{{ episode.title }}" />
+  </div>
+  <div>
+    <label for="author">Author:</label>
+    <input type="text" name="author" value="{{ episode.author }}" />
+  </div>
+  <div>
+    <label for="description">Summary:</label>
+    <input type="text" name="summary" value="{{ episode.summary }}" />
+  </div>
+  <div>
+    <label for="language">Publish date:</label>
+    <input type="text" name="publish_date" value="{{ episode.publish_date }}" />
+  </div>
+  <button type="submit">Save</button>
+</form>
+
+{% endblock %}

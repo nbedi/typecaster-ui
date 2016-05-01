@@ -1,0 +1,2 @@
+typecaster>=0.1.0
+Flask>=0.10.1

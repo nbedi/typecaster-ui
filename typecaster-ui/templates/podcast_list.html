@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="add"><a  href="/podcasts/new">Add podcast</a></div>
+
+<h1>Podcasts</h1>
+
+<ul class="podcasts">
+  {% for key, podcast in podcasts.iteritems() %}
+  <li>
+    <a href="/podcasts/{{ key }}">{{ podcast.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

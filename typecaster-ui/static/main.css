@@ -1,0 +1,82 @@
+body {
+  font-family: 'Lato', sans-serif;
+  border-top: 5px #333 solid;
+  margin: 0 auto 3rem;
+}
+
+a {
+  color: #008cba;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #007196;
+  transition: 0.2s all;
+}
+
+header, div#content {
+  max-width: 640px;
+  margin: auto;
+}
+
+header {
+  margin-bottom: 2.5rem;
+  border-bottom: 1px grey solid;
+}
+
+div.add {
+  text-align: right;
+  padding: 0.3rem 0.5rem;
+  float: right;
+}
+
+div.add a {
+  padding: 0.4rem 0.5rem;
+  line-height: 1.5;
+  background-color: #008cba;
+  color: #FFF;
+}
+
+div.add a:hover {
+  background-color: #007196;
+}
+
+ul.podcasts {
+  list-style-type: none;
+  font-size: 1.5rem;
+  padding-left: 0;
+  margin-top: 2.5rem;
+}
+
+ul.podcasts li {
+  margin: 1.5rem 0;
+}
+
+label {
+  display: block;
+}
+
+form#podcast,
+form#episode,
+div.podcast-episodes {
+  display: inline-block;
+  width: 48%;
+  vertical-align: top;
+}
+
+div.podcast-episodes {
+  margin-left: 3%;
+}
+
+form#podcast div,
+form#episode div {
+  margin: 1rem 0;
+}
+
+form#podcast input,
+form#episode textarea,
+form#episode input {
+  width: 95%;
+  margin-top: 0.5rem;
+  padding: 0.2rem auto;
+}
