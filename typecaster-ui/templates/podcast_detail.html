@@ -53,11 +53,11 @@
 
 <div class="podcast-episodes">
   <h3>Episodes</h3>
-  {% if podcast.episodes|length > 0 %}
+  {% if podcast.episode_ids|length > 0 %}
   <ul class="episodes">
-    {% for key, episode in podcast.episodes.iteritems() %}
+    {% for id, title in podcast.episode_ids.iteritems() %}
     <li>
-      <a href="episodes/{{ key }}">{{ episode.title }}</a>
+      <a href="episodes/{{ id }}">{{ title }}</a>
     </li>
     {% endfor %}
   </ul>

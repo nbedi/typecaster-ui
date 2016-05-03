@@ -56,11 +56,12 @@ def podcast_detail(podcast_id):
 
 @app.route('/podcasts/<podcast_id>/episodes/new/', methods=['GET', 'POST'])
 def create_episode(podcast_id):
+    podcast = podcasts[int(podcast_id)]
     if request.method == 'GET':
         kwargs = {}
         kwargs['action'] = 'Create'
         kwargs['episode'] = {
-            'title': 'Episode ' + str(len(podcasts[int(podcast_id)].episodes.keys())),
+            'title': 'Episode ' + str(len(podcast.episodes.keys())),
             'text_format': 'plain'
         }
         kwargs['episode_title'] = 'test'
@@ -68,16 +69,22 @@ def create_episode(podcast_id):
 
     if request.method == 'POST':
         synth_args = json.load(open('params.json'))
-        podcasts[int(podcast_id)].add_episode(request.form['text'], text_format=request.form['text_format'],
+        podcast.add_episode(request.form['text'], text_format=request.form['text_format'],
                        title=request.form['title'], author=request.form['author'],
                        synth_args=synth_args)
+        
+        if hasattr(podcast, 'episode_ids'):
+            podcast.episode_ids[len(podcast.episodes.keys())] = request.form['title']
+        else:
+            setattr(podcast, 'episode_ids', {0: request.form['title']})
+        
         return redirect(url_for('podcast_detail', podcast_id=podcast_id))
 
 @app.route('/podcasts/<podcast_id>/episodes/<episode_id>')
 def episode_detail(podcast_id, episode_id):
     kwargs = {}
     kwargs['podcast_title'] = podcasts[int(podcast_id)].title
-    kwargs['episode'] = podcasts[int(podcast_id)].episodes.values()[episode_id]
+    kwargs['episode'] = podcasts[int(podcast_id)].episodes.values()[int(episode_id)]
     return render_template('episode_detail.html', **kwargs)
 
 if __name__ == '__main__':
