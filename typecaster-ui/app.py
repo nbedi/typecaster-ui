@@ -82,10 +82,20 @@ def create_episode(podcast_id):
 
 @app.route('/podcasts/<podcast_id>/episodes/<episode_id>')
 def episode_detail(podcast_id, episode_id):
-    kwargs = {}
-    kwargs['podcast_title'] = podcasts[int(podcast_id)].title
-    kwargs['episode'] = podcasts[int(podcast_id)].episodes.values()[int(episode_id)]
-    return render_template('episode_detail.html', **kwargs)
+    podcast = podcasts[int(podcast_id)]
+    episode_title = podcast.episode_ids[int(episode_id)]
+    episode = podcast.episodes[episode_title]
+    if request.method == 'GET':
+        kwargs = {}
+        kwargs['podcast_title'] = podcast.title
+        kwargs['episode'] = episode
+        return render_template('episode_detail.html', **kwargs)
+    if request.method == 'POST':
+        for key, value in request.form.iteritems():
+            if getattr(episode, key) != value:
+                 setattr(episode, key, value)
+        podcast.update_rss_feed()
+        return redirect(url_for('podcast_detail', podcast_id=podcast_id))
 
 if __name__ == '__main__':
     app.run(debug=True)
